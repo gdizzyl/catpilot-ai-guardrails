@@ -60,12 +60,12 @@ For teams that want to customize rules or control updates:
 
 ### Step 1: Fork This Repo
 
-Fork `catpilotai/catpilot-ai-guardrails` to your organization (e.g., `YOUR_ORG/ai-guardrails`).
+Fork `catpilotai/catpilot-ai-guardrails` to your organization (e.g., `YOUR_ORG/catpilot-ai-guardrails`).
 
 ### Step 2: Add Submodule to Your Repos
 
 ```bash
-git submodule add git@github.com:YOUR_ORG/ai-guardrails.git .github/catpilot-ai-guardrails
+git submodule add git@github.com:YOUR_ORG/catpilot-ai-guardrails.git .github/catpilot-ai-guardrails
 ```
 
 ### Step 3: Run Setup & Commit

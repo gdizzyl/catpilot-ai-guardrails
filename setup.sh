@@ -165,7 +165,7 @@ if [ -f "$TARGET_FILE" ]; then
         echo -e "${GREEN}✓ Guardrails already installed!${NC}"
         echo ""
         echo "To update to the latest version:"
-        echo "  1. git submodule update --remote .github/ai-guardrails"
+        echo "  1. git submodule update --remote .github/catpilot-ai-guardrails"
         echo "  2. Re-run this script with --force"
         echo ""
         
@@ -242,7 +242,8 @@ if [ -n "$FRAMEWORK" ]; then
         echo "Available frameworks: $AVAILABLE_FRAMEWORKS"
     else
         # Check if framework already added
-        if grep -q "## 🔷 ${FRAMEWORK^}" "$TARGET_FILE" 2>/dev/null; then
+        FRAMEWORK_UPPER="$(echo ${FRAMEWORK} | tr '[:lower:]' '[:upper:]' | cut -c 1)$(echo ${FRAMEWORK} | cut -c 2-)"
+        if grep -q "## 🔷 ${FRAMEWORK_UPPER}" "$TARGET_FILE" 2>/dev/null; then
             echo -e "${YELLOW}  ⏭ $FRAMEWORK already included, skipping${NC}"
         else
             # Insert framework content before Project-Specific Rules section
