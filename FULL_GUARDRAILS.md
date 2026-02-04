@@ -1,6 +1,6 @@
 # AI Safety Guidelines — Full Reference
 
-> **Version:** 2.1.0  
+> **Version:** 1.0.0  
 > **Last Updated:** January 23, 2026  
 > **Condensed Version:** [copilot-instructions.md](./copilot-instructions.md)
 
@@ -744,15 +744,35 @@ if (!safePath.startsWith(ALLOWED_DIR)) {
 pickle.loads(user_data)          # Python
 yaml.load(user_data)             # Python (unsafe loader)
 unserialize($user_data)          # PHP
-ObjectInputStream.readObject()    # Java with untrusted input
+ObjectInputStream.readObject()   # Java
+Marshal.load(user_data)          # Ruby
+eval(user_data)                  # JavaScript/Python (Arbitrary Code Execution)
 
 # ✅ ALWAYS — Safe formats with validation
 import json
 data = json.loads(user_input)    # Safe, limited types
 
+# Ruby
+data = JSON.parse(user_input)
+
 # If YAML needed, use safe loader
 import yaml
 data = yaml.safe_load(user_input)
+```
+
+### Dynamic Code Execution (Eval)
+
+```javascript
+// ❌ NEVER — Executing string as code
+eval(userInput)
+new Function(userInput)()
+setTimeout(userInput, 100)
+
+// ✅ ALWAYS — Safe parsing and strictly typed logic
+JSON.parse(userInput)
+// Or use sandboxed VMs if absolutely necessary (e.g., vm2)
+const { VM } = require('vm2');
+new VM().run(userInput);
 ```
 
 ### Server-Side Request Forgery / SSRF (CWE-918)

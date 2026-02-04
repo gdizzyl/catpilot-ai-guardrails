@@ -171,7 +171,7 @@ git stash  # Before destructive operations
 | XSS | `innerHTML = userInput` | `textContent = userInput` |
 | Command Injection | `exec(\`ls ${input}\`)` | Allowlist commands, no user input |
 | Path Traversal | `readFile(req.query.path)` | `path.join(ALLOWED_DIR, basename(input))` |
-| Deserialization | `pickle.loads(userData)` | `JSON.parse()` with try/catch |
+| Deserialization | `pickle`/`Marshal`/`eval` | `JSON.parse()` or safe loaders |
 
 **Full examples:** [FULL_GUARDRAILS.md](./FULL_GUARDRAILS.md#secure-coding) | **Frameworks:** `frameworks/`
 
